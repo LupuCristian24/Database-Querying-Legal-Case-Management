@@ -1,0 +1,7 @@
+SELECT last_name AS 'Nume de Familie', appearance_nr AS 'Ordinea Aparitiei'
+FROM People	p
+JOIN People_Roles r ON p.person_id = r.person_id
+JOIN People_at_Trial t ON r.person_id = t.person_id
+WHERE t.trial_id = '1'
+ORDER BY appearance_nr
+LIMIT 5;

@@ -1,0 +1,14 @@
+USE lefti_lupuioan;
+DROP PROCEDURE IF EXISTS nr_workers;
+DELIMITER @
+CREATE PROCEDURE nr_workers(IN org_name VARCHAR(100),IN org_id INT, OUT workers INT)
+BEGIN
+ SELECT COUNT(People.organization_id) INTO workers
+ FROM People
+ JOIN Organizations ON Organizations.organization_id = People.organization_id
+ WHERE Organizations.organization_name = org_name AND People.organization_id = org_id;
+END @
+DELIMITER ;
+
+CALL lefti_lupuioan.nr_workers('Smartfit', 2, @workers);
+SELECT @workers;
